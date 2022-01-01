@@ -6,7 +6,11 @@ const io = require("socket.io")(3000,{
   },
 });
 
+let numberOfOnlineUsers = 0;
+
 //assign socket to user on connection to server
 io.on("connection", socket => {
+    numberOfOnlineUsers++;
+    console.log(`number of online users: ${numberOfOnlineUsers}`);
     socket.emit("chat-message", "hello world!");
 });
