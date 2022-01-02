@@ -17,14 +17,11 @@ const runServer = (() => {
     parseNewUser(socket);
 
 
-
     //delete socket.id from users on user-disconnect
     socket.on("disconnect", () => {
-
       logUsers(socket.id, "disconnected")
+      deleteUser(socket);
 
-      socket.broadcast.emit("user-disconnected", users[socket.id]);
-      delete users[socket.id];
     });
   });
 
@@ -50,5 +47,8 @@ const runServer = (() => {
     });
   }
 
-  
+  const deleteUser = (socket) => {
+    socket.broadcast.emit("user-disconnected", users[socket.id]);
+    delete users[socket.id];
+  }
 })();
