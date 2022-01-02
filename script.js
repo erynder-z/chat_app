@@ -25,6 +25,7 @@ messageForm.addEventListener("submit", event => {
     //get value from message input and send that message to the server
     const message = messageInput.value;
     socket.emit("send-chat-message", message);
+    appendMessage(`Ỳou: ${message}`); //append message to sending users screen
     messageInput.value = ""
 });
 
