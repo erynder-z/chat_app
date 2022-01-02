@@ -13,4 +13,8 @@ io.on("connection", socket => {
     numberOfOnlineUsers++;
     console.log(`number of online users: ${numberOfOnlineUsers}`);
     socket.emit("chat-message", "hello world!");
+
+    socket.on("send-chat-message", message => {
+      console.log(message);
+    });
 });
