@@ -8,7 +8,7 @@ const io = require("socket.io")(3000,{
 
 const users = {};
 
-//assign socket to user on connection to server
+//broadcast message when recieving send-chat-message
 io.on("connection", socket => {
     socket.on("send-chat-message", message => {
       socket.broadcast.emit("chat-message", 
@@ -17,12 +17,14 @@ io.on("connection", socket => {
         userName: users[socket.id]
       });
     });
-//save connecting users socket.id in users
+
+//save connecting users name to socket.id when recieving new-user
     socket.on("new-user", userName => {
       users[socket.id] = userName;
       socket.broadcast.emit("user-connected", userName);
     });
-//delete socket.id from users on disconnect
+
+//delete socket.id from users on user-disconnect
     socket.on("disconnect", () => {
       socket.broadcast.emit("user-disconnected", users[socket.id]);
       delete users[socket.id];

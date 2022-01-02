@@ -8,17 +8,17 @@ const userName = prompt("enter your name:");
 appendMessage("You joined");
 socket.emit("new-user", userName);
 
-//get chat-data emitted by server
+//display chat data recieved from server
 socket.on("chat-message", data => {
     appendMessage(`${data.userName}: ${data.message}`);
 });
 
-//get user-data emitted by server
+//display join message on user connect
 socket.on("user-connected", userName => {
     appendMessage(`${userName} joined`);
 });
 
-//user disconnect message
+//display disconnect message on disconnect
 socket.on("user-disconnected", userName => {
     appendMessage(`${userName} disconnected`);
 });
@@ -30,11 +30,11 @@ messageForm.addEventListener("submit", event => {
     //get value from message input and send that message to the server
     const message = messageInput.value;
     socket.emit("send-chat-message", message);
-    appendMessage(`Ỳou: ${message}`); //append message to sending users screen
+    appendMessage(`You: ${message}`);
     messageInput.value = ""
 });
 
-//display in clients browser
+//display message in clients browser
 function appendMessage(message) {
     const messageElement = document.createElement("div");
     messageElement.innerText = message;
