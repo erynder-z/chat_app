@@ -10,6 +10,8 @@ const users = {};
 
 //broadcast message when recieving send-chat-message
 io.on("connection", socket => {
+  console.log(`client[${socket.id}] connected`);
+  console.log('current clients count: ', io.engine.clientsCount);
     socket.on("send-chat-message", message => {
       socket.broadcast.emit("chat-message", 
       { 
@@ -26,16 +28,9 @@ io.on("connection", socket => {
 
 //delete socket.id from users on user-disconnect
     socket.on("disconnect", () => {
+      console.log(`client[${socket.id}] disconnected`);
+      console.log('current clients count: ', io.engine.clientsCount);
       socket.broadcast.emit("user-disconnected", users[socket.id]);
       delete users[socket.id];
     });
-});
-
-//log number of connected clients to server
-io.on("connect", () => {
- console.log(io.engine.clientsCount);
-});
-
-io.on("disconnect", () => {
-  console.log(io.engine.clientsCount);
 });
