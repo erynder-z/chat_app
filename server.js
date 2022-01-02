@@ -12,14 +12,9 @@ const runServer = (() => {
   //broadcast message when recieving send-chat-message
   io.on("connection", socket => {
     
-    logUsers(socket.id, "connected")
-
-    socket.on("send-chat-message", message => {
-      socket.broadcast.emit("chat-message", {
-        message: message,
-        userName: users[socket.id]
-      });
-    });
+    logUsers(socket.id, "connected");
+    parseMessage(socket);
+   
 
     //save connecting users name to socket.id when recieving new-user
     socket.on("new-user", userName => {
@@ -40,5 +35,18 @@ const runServer = (() => {
   const logUsers = (id, status) => {
     console.log(`client[${id}] ${status}`);
     console.log('current clients count: ', io.engine.clientsCount);
+  }
+
+  const parseMessage = (socket) => {
+    socket.on("send-chat-message", message => {
+      socket.broadcast.emit("chat-message", {
+        message: message,
+        userName: users[socket.id]
+      });
+    });
+  }
+
+  const parseNewUser = () => {
+    
   }
 })();
