@@ -17,10 +17,15 @@ io.on("connection", socket => {
         userName: users[socket.id]
       });
     });
-
+//save connecting users socket.id in users
     socket.on("new-user", userName => {
       users[socket.id] = userName;
       socket.broadcast.emit("user-connected", userName);
+    });
+//delete socket.id from users on disconnect
+    socket.on("disconnect", () => {
+      socket.broadcast.emit("user-disconnected", users[socket.id]);
+      delete users[socket.id];
     });
 });
 

@@ -18,6 +18,11 @@ socket.on("user-connected", userName => {
     appendMessage(`${userName} joined`);
 });
 
+//user disconnect message
+socket.on("user-disconnected", userName => {
+    appendMessage(`${userName} disconnected`);
+});
+
 
 //add eventListener and prevent default page refresh on button press
 messageForm.addEventListener("submit", event => {
