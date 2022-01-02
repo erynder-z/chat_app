@@ -26,16 +26,18 @@ socket.on("user-disconnected", userName => {
     appendMessage(`${userName} disconnected`);
 });
 
-
 //add eventListener and prevent default page refresh on button press
-messageForm.addEventListener("submit", event => {
-    event.preventDefault();
-    //get value from message input and send that message to the server
-    const message = messageInput.value;
-    socket.emit("send-chat-message", message);
-    appendMessage(`You: ${message}`);
-    messageInput.value = ""
-});
+const sendMessage = (() => {
+    messageForm.addEventListener("submit", event => {
+        event.preventDefault();
+        //get value from message input and send that message to the server
+        const message = messageInput.value;
+        socket.emit("send-chat-message", message);
+        appendMessage(`You: ${message}`);
+        messageInput.value = ""
+    });
+})();
+
 
 //display message in clients browser
 function appendMessage(message) {
