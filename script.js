@@ -10,7 +10,7 @@ socket.emit("new-user", userName);
 
 //get chat-data emitted by server
 socket.on("chat-message", data => {
-    appendMessage(data);
+    appendMessage(`${data.userName}: ${data.message}`);
 });
 
 //get user-data emitted by server

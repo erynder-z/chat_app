@@ -8,11 +8,14 @@ const io = require("socket.io")(3000,{
 
 const users = {};
 
-
 //assign socket to user on connection to server
 io.on("connection", socket => {
     socket.on("send-chat-message", message => {
-      socket.broadcast.emit("chat-message", message)
+      socket.broadcast.emit("chat-message", 
+      { 
+        message: message,
+        userName: users[socket.id]
+      });
     });
 
     socket.on("new-user", userName => {
