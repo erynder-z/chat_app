@@ -6,12 +6,18 @@ const io = require("socket.io")(3000,{
   },
 });
 
-let numberOfOnlineUsers = 0;
+const users = {};
+
 
 //assign socket to user on connection to server
 io.on("connection", socket => {
     socket.on("send-chat-message", message => {
-      socket.broadcast.emit("chat-message", message);
+      socket.broadcast.emit("chat-message", message)
+    });
+
+    socket.on("new-user", userName => {
+      users[socket.id] = userName;
+      socket.broadcast.emit("user-connected", userName);
     });
 });
 

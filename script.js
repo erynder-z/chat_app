@@ -4,10 +4,20 @@ const messageContainer = document.getElementById("message-container");
 const messageForm = document.getElementById("send-container");
 const messageInput = document.getElementById("message-input");
 
-//get data emitted by server
+const userName = prompt("enter your name:");
+appendMessage("You joined");
+socket.emit("new-user", userName);
+
+//get chat-data emitted by server
 socket.on("chat-message", data => {
     appendMessage(data);
 });
+
+//get user-data emitted by server
+socket.on("user-connected", userName => {
+    appendMessage(`${userName} joined`);
+});
+
 
 //add eventListener and prevent default page refresh on button press
 messageForm.addEventListener("submit", event => {
