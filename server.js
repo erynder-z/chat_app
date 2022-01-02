@@ -10,10 +10,16 @@ let numberOfOnlineUsers = 0;
 
 //assign socket to user on connection to server
 io.on("connection", socket => {
-    numberOfOnlineUsers++;
-    console.log(`number of online users: ${numberOfOnlineUsers}`);
-
     socket.on("send-chat-message", message => {
       socket.broadcast.emit("chat-message", message);
     });
+});
+
+//log number of connected clients to server
+io.on("connect", () => {
+ console.log(io.engine.clientsCount);
+});
+
+io.on("disconnect", () => {
+  console.log(io.engine.clientsCount);
 });
