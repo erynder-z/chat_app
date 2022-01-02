@@ -11,22 +11,18 @@ const runServer = (() => {
 
   //broadcast message when recieving send-chat-message
   io.on("connection", socket => {
-    
+
     logUsers(socket.id, "connected");
     parseMessage(socket);
-   
+    parseNewUser(socket);
 
-    //save connecting users name to socket.id when recieving new-user
-    socket.on("new-user", userName => {
-      users[socket.id] = userName;
-      socket.broadcast.emit("user-connected", userName);
-    });
+
 
     //delete socket.id from users on user-disconnect
     socket.on("disconnect", () => {
 
       logUsers(socket.id, "disconnected")
-      
+
       socket.broadcast.emit("user-disconnected", users[socket.id]);
       delete users[socket.id];
     });
@@ -46,7 +42,13 @@ const runServer = (() => {
     });
   }
 
-  const parseNewUser = () => {
-    
+  const parseNewUser = (socket) => {
+    //save connecting users name to socket.id when recieving new-user
+    socket.on("new-user", userName => {
+      users[socket.id] = userName;
+      socket.broadcast.emit("user-connected", userName);
+    });
   }
+
+  
 })();
