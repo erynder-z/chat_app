@@ -9,7 +9,7 @@ const io = require("socket.io")(3000, {
 const runServer = (() => {
   const users = {};
 
-  //broadcast message when recieving send-chat-message
+
   io.on("connection", socket => {
 
     logUsers(socket.id, "connected");
@@ -17,7 +17,6 @@ const runServer = (() => {
     parseNewUser(socket);
 
 
-    //delete socket.id from users on user-disconnect
     socket.on("disconnect", () => {
       logUsers(socket.id, "disconnected")
       deleteUser(socket);
@@ -25,11 +24,12 @@ const runServer = (() => {
     });
   });
 
+  //log active users to server
   const logUsers = (id, status) => {
     console.log(`client[${id}] ${status}`);
     console.log('current clients count: ', io.engine.clientsCount);
   }
-
+  //broadcast message when recieving send-chat-message
   const parseMessage = (socket) => {
     socket.on("send-chat-message", message => {
       socket.broadcast.emit("chat-message", {
@@ -39,14 +39,15 @@ const runServer = (() => {
     });
   }
 
+  //save connecting users name to socket.id when recieving new-user
   const parseNewUser = (socket) => {
-    //save connecting users name to socket.id when recieving new-user
     socket.on("new-user", userName => {
       users[socket.id] = userName;
       socket.broadcast.emit("user-connected", userName);
     });
   }
 
+  //delete socket.id from users on user-disconnect
   const deleteUser = (socket) => {
     socket.broadcast.emit("user-disconnected", users[socket.id]);
     delete users[socket.id];
