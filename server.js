@@ -6,6 +6,7 @@ const io = require("socket.io")(3000, {
   },
 });
 
+const runServer = (() => {
   const users = {};
 
   //broadcast message when recieving send-chat-message
@@ -30,7 +31,7 @@ const io = require("socket.io")(3000, {
     socket.on("disconnect", () => {
 
       logUsers(socket.id, "disconnected")
-
+      
       socket.broadcast.emit("user-disconnected", users[socket.id]);
       delete users[socket.id];
     });
@@ -40,4 +41,4 @@ const io = require("socket.io")(3000, {
     console.log(`client[${id}] ${status}`);
     console.log('current clients count: ', io.engine.clientsCount);
   }
-
+})();
