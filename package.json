@@ -1,5 +1,5 @@
 {
-  "name": "chat_app",
+  "name": "mini messenger",
   "version": "1.0.0",
   "description": "simple realtime chat app",
   "main": "index.js",
