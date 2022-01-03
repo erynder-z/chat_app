@@ -7,5 +7,74 @@
 body {
     padding: 0;
     margin: 0;
-    background: rgb(143, 114, 168);
+    
+}
+
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background:rgb(159, 119, 194);
+    height: 10vh;
+    padding: 0 25px;
+}
+
+.title {
+    margin: 0 auto;
+    font-size: 30px;
+}
+
+.menu-selector {
+    position: relative;
+    display: inline-block;
+    font-size: 26px;
+  }
+
+
+.menu-selector:hover .menu-content,
+.menu-selector:active .menu-content  {
+  display: block;
+}
+
+.menu-content {
+    display: none;
+    position: absolute;
+    background: #e7f3fc;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    right: 0;
+    left: auto;
+  }
+
+.message-container {
+    height: 80vh;
+    margin: 0 auto;
+    padding: 25px 50px;
+    background: rgb(226, 222, 230);
+}
+
+.lower {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: rgb(213, 211, 214);
+    border-top: solid 1px black;
+}
+
+.send-container {
+    width: 100vw;
+    display: flex;
+    justify-content: space-around;
+}
+
+#message-input {
+    width: 75%;
+    height: 3vh;
+}
+
+#send-button {
+    width: 15vw;
+    height: 3vh;
 }
