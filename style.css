@@ -7,14 +7,14 @@
 body {
     padding: 0;
     margin: 0;
-    
+
 }
 
 .top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background:rgb(159, 119, 194);
+    background: rgb(159, 119, 194);
     height: 10vh;
     padding: 0 25px;
     position: relative;
@@ -30,17 +30,19 @@ body {
     position: relative;
     display: inline-block;
     font-size: 26px;
-  }
+    width: 50px;
+    display: flex;
+    justify-content: center;
+}
 
-  .menu {
-
-      background: rgb(190, 149, 226);
-  }
+.menu {
+    background: rgb(190, 149, 226);
+}
 
 
 .menu-selector:hover .menu-content,
-.menu-selector:active .menu-content  {
-  display: block;
+.menu-selector:focus .menu-content {
+    display: block;
 }
 
 .menu-content {
@@ -52,7 +54,11 @@ body {
     z-index: 1;
     right: 0;
     left: auto;
-  }
+}
+
+.menu-content>div:hover {
+    background: rgb(137, 84, 184);
+}
 
 .message-container {
     position: relative;
