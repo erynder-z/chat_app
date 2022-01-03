@@ -52,6 +52,15 @@ function appendMessage(message, cssClass) {
     messageElement.classList.add(cssClass);
 }
 
+//disconnect socket
+const disconnectSocket = (() => {
+    const disconnect = document.getElementById("logoutBtn");
+    disconnect.addEventListener("click", () => {
+        socket.disconnect();
+        alert("disconnected");
+    });
+})();
+
 //Create a switch do toggle theme.
 const darkMode = (() => {
     const toggleDarkmode = document.getElementById("darkmodeBtn");
