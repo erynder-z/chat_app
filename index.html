@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,27 +11,27 @@
     <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script defer src="script.js"></script>
 </head>
-<body>
-    <div class="top">
-        <div class="title">Messenger</div>
-        
 
+<body>
+    <div id="top" class="top">
+        <div class="title">Messenger</div>
         <div class="menu-selector">
             <a id="menu" onclick="void(0)"></a>
             <i class="fa fa-ellipsis-v"></i>
             <div class="menu-content">
-                <div id="logoutBtn" class="logout">disconnect</div>
-                <div id="darkmodeBtn" class="darkmode">dark mode</div>
+                <div id="logoutBtn" class="menu">disconnect</div>
+                <div id="darkmodeBtn" class="menu">dark mode</div>
             </div>
         </div>
 
     </div>
     <div id="message-container" class="message-container"></div>
-    <div class="lower">
-    <form id="send-container" class="send-container">
-        <input type="text" id="message-input">
-        <button type="send" id="send-button">Send</button>
-    </form>
-</div>
+    <div id="lower" class="lower">
+        <form id="send-container" class="send-container">
+            <input type="text" id="message-input">
+            <button type="send" id="send-button">Send</button>
+        </form>
+    </div>
 </body>
+
 </html>

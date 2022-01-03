@@ -50,4 +50,24 @@ function appendMessage(message) {
     messageContainer.append(messageElement);
 }
 
+//Create a switch do toggle theme.
+const darkMode = (() => {
+    const toggleDarkmode = document.getElementById("darkmodeBtn");
+    toggleDarkmode.addEventListener("click", () => {
+        changeTheme();
+    });
+})();
+
+//Change theme  for Header, Body and Footer sections.
+const changeTheme = () => {
+    const top = document.getElementById("top");
+    const middle = document.getElementById("message-container");
+    const lower = document.getElementById("lower");
+
+        top.classList.toggle("darkmode");
+        middle.classList.toggle("darkmode");
+        lower.classList.toggle("darkmode");
+ 
+}
+
 })();
