@@ -1,14 +1,14 @@
-//create a server on port 3000
-const io = require("socket.io")(3000, {
-  cors: {
-    origin: "http://127.0.0.1:5500",
-    methods: ["GET", "POST"]
-  },
-});
-
 const runServer = (() => {
-  const users = {};
 
+  //create a server on port 3000
+  const io = require("socket.io")(3000, {
+    cors: {
+      origin: "http://127.0.0.1:5500",
+      methods: ["GET", "POST"]
+    },
+  });
+
+  const users = {};
 
   io.on("connection", socket => {
 
@@ -52,4 +52,5 @@ const runServer = (() => {
     socket.broadcast.emit("user-disconnected", users[socket.id]);
     delete users[socket.id];
   }
+  
 })();
