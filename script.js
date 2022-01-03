@@ -10,7 +10,7 @@ const getUserName = (() => {
     socket.emit("new-user", userName);
 })();
 
-
+const handleEvents = (() => {
 //display chat data recieved from server
 socket.on("chat-message", data => {
     appendMessage(`${data.userName}: ${data.message}`);
@@ -25,6 +25,8 @@ socket.on("user-connected", userName => {
 socket.on("user-disconnected", userName => {
     appendMessage(`${userName} disconnected`);
 });
+})();
+
 
 //add eventListener and prevent default page refresh on button press
 const sendMessage = (() => {
