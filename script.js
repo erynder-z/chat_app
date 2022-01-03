@@ -1,3 +1,5 @@
+const runClient = (() => {
+
 //get the server hosted in server.js
 const socket = io("http://localhost:3000");
 const messageContainer = document.getElementById("message-container");
@@ -47,3 +49,5 @@ function appendMessage(message) {
     messageElement.innerText = message;
     messageContainer.append(messageElement);
 }
+
+})();
