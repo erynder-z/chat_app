@@ -8,24 +8,24 @@ const messageInput = document.getElementById("message-input");
 
 const getUserName = (() => {
     const userName = prompt("enter your name:");
-    appendMessage("You joined");
+    appendMessage("You joined", "join");
     socket.emit("new-user", userName);
 })();
 
 const handleEvents = (() => {
 //display chat data recieved from server
 socket.on("chat-message", data => {
-    appendMessage(`${data.userName}: ${data.message}`);
+    appendMessage(`${data.userName}: ${data.message}`, "other");
 });
 
 //display join message on user connect
 socket.on("user-connected", userName => {
-    appendMessage(`${userName} joined`);
+    appendMessage(`${userName} joined`, "join");
 });
 
 //display disconnect message on disconnect
 socket.on("user-disconnected", userName => {
-    appendMessage(`${userName} disconnected`);
+    appendMessage(`${userName} disconnected`, "leave");
 });
 })();
 
@@ -37,17 +37,19 @@ const sendMessage = (() => {
         //get value from message input and send that message to the server
         const message = messageInput.value;
         socket.emit("send-chat-message", message);
-        appendMessage(`You: ${message}`);
-        messageInput.value = ""
+        appendMessage(`You: ${message}`, "me");
+        messageInput.value = "";
     });
 })();
 
 
 //display message in clients browser
-function appendMessage(message) {
+function appendMessage(message, cssClass) {
     const messageElement = document.createElement("div");
     messageElement.innerText = message;
     messageContainer.append(messageElement);
+    messageElement.classList.add("msg");
+    messageElement.classList.add(cssClass);
 }
 
 //Create a switch do toggle theme.

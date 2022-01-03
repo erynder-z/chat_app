@@ -69,6 +69,12 @@ body {
     background: rgb(226, 222, 230);
 }
 
+@media (max-width: 50em) {
+    .message-container  {
+        padding: 25px 25px;
+    }
+}
+
 .lower {
     height: 10vh;
     display: flex;
@@ -92,6 +98,45 @@ body {
 #send-button {
     width: 15vw;
     height: 3vh;
+}
+
+.msg {
+    max-width: fit-content;
+    margin: 5px 0;
+}
+
+.join {
+    color: green;
+    font-weight: bold;
+    text-align: center;
+}
+
+.leave {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+.me {
+    color: blue;
+}
+
+.other {
+    color: purple;
+}
+
+@media (max-width: 50em) {
+    .msg {
+        max-width: none;
+        margin: 5px 0;
+    }
+
+    .me  {
+        text-align: right;
+    }
+    .other  {
+        text-align: left;
+    }
 }
 
 .darkmode {
