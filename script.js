@@ -1,7 +1,7 @@
 const runClient = (() => {
 
 //get the server hosted in server.js
-const socket = io("http://localhost:3000");
+const socket = io("http://localhost:3000"); //configure to the address of your server
 const messageContainer = document.getElementById("message-container");
 const messageForm = document.getElementById("send-container");
 const messageInput = document.getElementById("message-input");
